@@ -1,10 +1,11 @@
-from ..datasets import Page
+from ..page import Page
+from ..bbox import BBox
 from abc import ABC, abstractmethod
 
 
 class BaseSorter(ABC):
     @abstractmethod
-    def sort(page: Page):
+    def sort(self, page: Page):
         pass
     
 
