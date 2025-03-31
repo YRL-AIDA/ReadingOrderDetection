@@ -26,7 +26,9 @@ class ExampleDataset(BaseDataset):
                        y_top_left =     b['y_top_left'],
                        y_bottom_right = b['y_bottom_right']) for i, b in enumerate(blocks)]
         true_reading_order = dict() 
+        text = []
         for i, b in enumerate(blocks):
-            true_reading_order[i] = int(b["text"])
-        page = Page(bboxes, true_reading_order, None)
+            true_reading_order[int(b["text"])] = i
+            text.append(b['text'])
+        page = Page(bboxes, true_reading_order, img=None, text=text)
         return page
