@@ -12,12 +12,13 @@ class TriangularSorter(BaseSorter):
         for i in range(len(segs_)):
             segs.append(Left2RightTop2BottomImageSegment.converter(segs_[i]))
             segs[i].index = i
-        
+
         for i in range(len(segs)):
-            for j in range(len(segs)):
-                if segs[j].greater_then_vertical(segs[i]):
-                    segs[i], segs[j] = segs[j], segs[i]
-                elif segs[j].greater_then_vertical(segs[i]) is None and segs[j].greater_then_horizont(segs[i]):
-                    segs[i], segs[j] = segs[j], segs[i]
-                    
+            max_i = i
+            for j in range(i+1, len(segs)):
+                j_gt_max_i_v = segs[j].greater_then_vertical(segs[max_i])
+                j_gt_max_i_h = segs[j].greater_then_horizont(segs[max_i])
+                if  (j_gt_max_i_v) or (j_gt_max_i_v is None and j_gt_max_i_h):
+                    max_i = j
+            segs[i], segs[max_i] = segs[max_i], segs[i]          
         return  [seg.index for seg in segs]
