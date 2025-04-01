@@ -11,7 +11,7 @@ NAME_FILES = os.listdir(PATH_DATASET)
 class ExampleDataset(BaseDataset):
 
     def get_pages(self) -> list[Page]:
-        return [self.__open_page_num(i) for i in range(len(NAME_FILES))]
+        return [self.__open_page_num(i) for i, name in enumerate(NAME_FILES) if '.json' in name ]
 
     def __open_page_num(self, num:int):
         if num > len(NAME_FILES) or num < 0:
