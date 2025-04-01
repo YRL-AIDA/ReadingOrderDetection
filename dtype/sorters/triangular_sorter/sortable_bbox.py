@@ -4,7 +4,10 @@ import math
 class Left2RightTop2BottomImageSegment(BBox):
      
     def __init__(self, x_top_left: int, y_top_left: int, x_bottom_right: int, y_bottom_right: int) -> None:
-        super().__init__(x_top_left, y_top_left, x_bottom_right, y_bottom_right)
+        super().__init__(x_top_left=x_top_left, 
+                         y_top_left=y_top_left, 
+                         x_bottom_right=x_bottom_right, 
+                         y_bottom_right=y_bottom_right)
         
     
     @staticmethod
@@ -39,7 +42,7 @@ class Left2RightTop2BottomImageSegment(BBox):
         cos2 = self.__get_min_cos(l2, r2, c1)
         
         if cos1 < 0 and cos2 < 0:
-            return (BBox.x_top_left + BBox.width/2) < (self.x_top_left + self.width/2)
+            return (BBox.x_top_left + BBox.width/2) > (self.x_top_left + self.width/2)
         else:
             return None # ответ на вопрос больше будет отрицателен, не сравнимы
         
@@ -57,8 +60,8 @@ class Left2RightTop2BottomImageSegment(BBox):
             
         cos1 = self.__get_min_cos(l1, r1, c2)
         cos2 = self.__get_min_cos(l2, r2, c1)
-
+        
         if cos1 < 0 and cos2 < 0:
-            return (BBox.y_top_left + BBox.height/2) < (self.y_top_left + self.height/2)
+            return (BBox.y_top_left + BBox.height/2) > (self.y_top_left + self.height/2)
         else:
             return None
