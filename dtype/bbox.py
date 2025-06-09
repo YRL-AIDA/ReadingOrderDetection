@@ -19,3 +19,6 @@ class BBox:
     def __str__(self):
         return f"<BBox id: {self.id}>"
     
+    def __repr__(self):
+        return f"<BBox id: {self.id}, {self.x_top_left}, {self.y_top_left}, {self.x_bottom_right}, {self.y_bottom_right}>"
+    
