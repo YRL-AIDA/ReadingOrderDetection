@@ -20,7 +20,7 @@ class ExampleDataset(BaseDataset):
         name_file = os.path.join(PATH_DATASET, f'boxes_{num}.json')
         with open(name_file, 'r') as f:
             blocks =json.load(f)['blocks']
-        bboxes = [BBox(id=b['text'],
+        bboxes = [BBox(id=i,
                        x_top_left =     b['x_top_left'],
                        x_bottom_right = b['x_bottom_right'],
                        y_top_left =     b['y_top_left'],
@@ -32,3 +32,6 @@ class ExampleDataset(BaseDataset):
             text.append(b['text'])
         page = Page(bboxes, true_reading_order, img=None, text=text)
         return page
+    
+    def get_answers(self):
+        pass

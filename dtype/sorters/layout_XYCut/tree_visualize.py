@@ -1,11 +1,9 @@
-
 from treelib import Node, Tree
 from ...datasets import ExampleDataset
 from .XYCut_sorter import XYCut
+from ....utils.drawer import Drawer
 
 page = ExampleDataset().pages[2]
-tree = Tree()
 xycut = XYCut()
-edge = xycut.sort_using_XYCut(page=page)
-print(edge.childs, "Дети")
-    
+result = xycut.sort(page=page)
+Drawer.draw_with_arrows(page, pred_read=[int(item) for item in result])
