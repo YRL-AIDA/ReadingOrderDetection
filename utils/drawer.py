@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Qt5Agg')
 from matplotlib import pyplot as plt
 from dtype.bbox import BBox
 from dtype.sorters.triangular_sorter.sortable_bbox import Left2RightTop2BottomImageSegment
@@ -94,6 +96,7 @@ class Drawer():
                             xytext=(x1+w1, y1+h1), 
                                 arrowprops=dict(arrowstyle='->', color='red', lw=1.5))
         plt.title('Синий - данный. Красный - полученный')
+        
         plt.show()
         
         

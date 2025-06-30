@@ -80,8 +80,7 @@ class ArgumentationFramework:
                 return False
         return True
 
-    #TODO: Доделать. Проверять не атакующие элементы, а атакуемые, идея с траспонированием матрицы. Элемент считается защищенным, если каждая атака на него
-    # защищена. 
+ 
     def F(self, S:list[int]) -> list['Argument']:
         '''
         Функция из работы F(S) = {a | те элементы, которые защищены элементами множества а}. Под защитой элемента b понимается атака на тот аргумент, который атакует b
@@ -161,6 +160,6 @@ class Argument:
         self.bbox_second = bbox_second
 
     def __repr__(self):
-        return f"({self.bbox_first}, {self.bbox_second})"
+        return f"arg({self.bbox_first}, {self.bbox_second})"
 
         
