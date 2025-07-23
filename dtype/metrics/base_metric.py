@@ -15,5 +15,5 @@ class BaseMetric(ABC):
         return self.metric(data)
     
     @abstractmethod
-    def metric(self, data:List[Tuple[int]]) -> float:
+    def metric(self, right_read: List[int], pred_read: List[int]) -> float:
         pass

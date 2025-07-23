@@ -3,9 +3,8 @@ from typing import List, Tuple
 
 
 class ARD(BaseMetric):
-    def metric(self, data: Tuple[List[int]]) -> float:
-        right_order = data[0]
-        pred_order = data[1]
+    def metric(self, right_order, pred_order) -> float:
+
 
         n = len(right_order)
         score = 0
