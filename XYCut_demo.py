@@ -6,7 +6,6 @@ from utils.drawer import *
 from dtype.sorters.layout_XYCut.XYCut_sorter import XYCut
 
 pages = ExampleDataset().pages
-
 xycut = XYCut()
 for page in pages:
     result = xycut.sort(page=page)
