@@ -6,11 +6,11 @@ from .Walley import Walley
 import time
 
 class XYCut(BaseSorter):
-    
-    def sort(self, page:'Page'):
+
+    def sort(self, page:'Page') -> list[int]:
         return self.sort_using_XYCut(page)
 
-    def sort_using_XYCut(self, page:'Page') -> Edge:
+    def sort_using_XYCut(self, page:'Page') -> list[int]:
         bboxes = page.bboxes
         init_edge = Edge(number = "init")
         init_walley = Walley(bboxes=bboxes)
@@ -24,12 +24,12 @@ class XYCut(BaseSorter):
                     res.append(child.number)
         print_childs(init_edge.childs)
         return res
-    
+
 
     @staticmethod
     def reqursion_step(walley: Walley, edge:Edge) -> list[Edge]:
         '''
-        Шаг рекурсии, возвращает массив эджей, который представляет собой детей родительского эджа. 
+        Шаг рекурсии, возвращает массив эджей, который представляет собой детей родительского эджа.
         '''
         bboxes = walley.bboxes
         min_coor, max_coor = Walley.get_max_min(bboxes)
@@ -44,19 +44,19 @@ class XYCut(BaseSorter):
             grups = [Edge(number=bbox.id) for bbox in bboxes]
             print(grups, "Если не произошло разделения")
             return grups
-            
+
     @staticmethod
     def _get_childs_x(bboxes:list[BBox], proec_x, min_coor, max_coor, edge:Edge):
         steps = [min_coor[0]] + proec_x + [max_coor[0]]
         grups = []
         for _ in range(len(proec_x) + 1):
             grups.append(Walley())
-        
+
         for i, (first, second) in enumerate(zip(steps[:-1], steps[1:])):
             for bbox in bboxes:
                 if first <= bbox.x_top_left <= second: #Расчет на то что если левый угол ббокса в группе проекционной, то и правая тоже
                     grups[i].bboxes.append(bbox)
-        
+
         result = []
         for walley in grups:
             if len(walley.bboxes) <= 1:
@@ -66,7 +66,7 @@ class XYCut(BaseSorter):
                 XYCut.reqursion_step(walley, edge=temp)
                 result.append(temp)
         edge.childs = result
-    
+
 
     @staticmethod
     def _get_childs_y(bboxes:list[BBox], proec_y, min_coor, max_coor, edge:Edge):
@@ -82,14 +82,14 @@ class XYCut(BaseSorter):
         result = []
         for walley in grups:
             if len(walley.bboxes) <= 1:
-                
+
                 result.append(Edge(walley.bboxes[0].id))
             else:
                 temp = Edge(number=-1)
                 XYCut.reqursion_step(walley, edge=temp)
                 result.append(temp)
         edge.childs = result
-    
+
 
     @staticmethod
     def _proection_x(bboxes:list[BBox], min_ccor, max_coor):
@@ -111,7 +111,7 @@ class XYCut(BaseSorter):
             else:
                 flag = 1
         return proections if len(proections) != 0 else False
-    
+
 
     @staticmethod
     def _proection_y(bboxes:list[BBox], min_ccor, max_coor):
@@ -122,7 +122,7 @@ class XYCut(BaseSorter):
             for bbox in bboxes:
                 if bbox.y_top_left <= y < bbox.y_bottom_right:
                     count += 1
-            
+
             if count == 0:
                 if len(proections)!=0:
                     if y != (proections[-1] + 1) and flag == 1:
@@ -134,5 +134,3 @@ class XYCut(BaseSorter):
             else:
                 flag = 1
         return proections if len(proections) != 0 else False
-
-    

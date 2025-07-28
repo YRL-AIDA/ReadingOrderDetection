@@ -5,7 +5,5 @@ from abc import ABC, abstractmethod
 
 class BaseSorter(ABC):
     @abstractmethod
-    def sort(self, page: Page):
+    def sort(self, page: Page) -> list[int]:
         pass
-    
-

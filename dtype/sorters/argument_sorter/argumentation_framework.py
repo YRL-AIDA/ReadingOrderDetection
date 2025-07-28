@@ -13,7 +13,7 @@ class ArgumentationFramework:
         Также фреймворк сам выделит стабильное расширение для этого множества аргументов и атак.
 
         Также, при работе с множествами: множество S это массив длины len(self.arguments), заполненный либо 0 либо 1. 1 означает то,
-        что этот аргумент попадает в множество S. 
+        что этот аргумент попадает в множество S.
         '''
         self.arguments = arguments
         if attacks is None:
@@ -33,7 +33,7 @@ class ArgumentationFramework:
 
     def get_preffered_extentions(self):
         max_len = max(sum(i) for i in self.complete_extensions)
-        
+
         pref_ext = []
         for ext in self.complete_extensions:
             if sum(ext) == max_len:
@@ -80,7 +80,7 @@ class ArgumentationFramework:
                 return False
         return True
 
- 
+
     def F(self, S:list[int]) -> list['Argument']:
         '''
         Функция из работы F(S) = {a | те элементы, которые защищены элементами множества а}. Под защитой элемента b понимается атака на тот аргумент, который атакует b
@@ -106,7 +106,7 @@ class ArgumentationFramework:
                         break
             if flag == 1:
                 F_S[i] = 1
-        return F_S                    
+        return F_S
 
 
     def get_attacks(self) -> list[list]:
@@ -121,7 +121,7 @@ class ArgumentationFramework:
                 if self.arguments[i].bbox_second == self.arguments[j].bbox_second:
                     attack_matrix[i][j] = 1
         return attack_matrix
-    
+
     def print_attacks(self) -> None:
         for i in range(len(self.attacks)):
             for j in range(len(self.attacks[i])):
@@ -151,7 +151,7 @@ class ArgumentationFramework:
             for i in range(len(ext)):
                 if ext[i] == 1:
                     print(self.arguments[i], end = '')
-            print(')')             
+            print(')')
 
 class Argument:
 
@@ -160,6 +160,4 @@ class Argument:
         self.bbox_second = bbox_second
 
     def __repr__(self):
-        return f"arg({self.bbox_first}, {self.bbox_second})"
-
-        
+        return f"next({self.bbox_first}, {self.bbox_second})"

@@ -4,10 +4,10 @@ from .argumentation_framework import Argument, ArgumentationFramework
 
 class Argument_sorter(BaseSorter):
 
-        
+
     def sort(self, page:'Page'):
         return self.sort_using_ArugemtationFramework(page)
-    
+
 
     def sort_using_ArugemtationFramework(self, page:Page):
         self.page = page
@@ -24,12 +24,12 @@ class Argument_sorter(BaseSorter):
             if pred_reads[i] == 1:
                 args.append(argumentation_framework.arguments[i])
         self.args = args
-        
+
         line = self.get_lines(args=args)
         reading_order = self.get_reading_order(line)
         return reading_order
-        
-        
+
+
     def get_reading_order(self, line):
         reading_order = []
         for arg in line:
@@ -37,7 +37,7 @@ class Argument_sorter(BaseSorter):
         reading_order.append(line[-1].bbox_second)
         return reading_order
 
-        
+
     def get_lines(self, args):
         maxx = 0
         line = None
@@ -49,7 +49,7 @@ class Argument_sorter(BaseSorter):
                 maxx = len(current_line)
                 line = current_line
         return line
-                
+
 
 
     def get_line_from_arg(self, arg, current_max, current_line):
@@ -74,7 +74,7 @@ class Argument_sorter(BaseSorter):
             new_args.append(arg)
         return new_args
 
-        
+
 
     def get_bbox_arguments_horizontal(self, bbox:BBox):
         arguments = []
@@ -83,12 +83,12 @@ class Argument_sorter(BaseSorter):
         delta_x = abs(minn[0] - maxx[0])//100
         closest = self.get_closets_bbox_x(bbox)
         consts = closest + delta_x
-        
+
         for temp_bbox in self.page.bboxes:
             if (bbox.y_top_left <= temp_bbox.y_top_left <= bbox.y_bottom_right \
                   or bbox.y_top_left <= temp_bbox.y_bottom_right <= bbox.y_bottom_right) and \
                     bbox.x_bottom_right <= temp_bbox.x_top_left <= consts:
-                
+
                 arguments.append(temp_bbox)
         return arguments
 
@@ -99,13 +99,13 @@ class Argument_sorter(BaseSorter):
         delta_x = abs(minn[1] - maxx[1])//100
         closest = self.get_closets_bbox_y(bbox)
         consts = closest + delta_x
-        
+
         for temp_bbox in self.page.bboxes:
             if bbox.y_bottom_right <= temp_bbox.y_top_left <= consts:
-                
+
                 arguments.append(temp_bbox)
         return arguments
-    
+
 
     def get_closets_bbox_x(self, bbox:BBox) -> BBox:
         y_min = bbox.y_top_left
@@ -117,7 +117,7 @@ class Argument_sorter(BaseSorter):
             if bbox.x_bottom_right <=bboxx.x_top_left <=current_min and y_min <= bboxx.y_top_left <= y_max:
                 current_min = bboxx.x_top_left
         return current_min
-    
+
     def get_closets_bbox_y(self, bbox:BBox) -> BBox:
         x_min = bbox.x_top_left
         x_max = bbox.x_bottom_right
@@ -129,10 +129,3 @@ class Argument_sorter(BaseSorter):
             if bbox.y_bottom_right <=bboxx.y_top_left <=current_min and x_min <= bboxx.x_top_left <= x_max:
                 current_min = bboxx.y_top_left
         return current_min
-        
-
-
-
-        
-        
-                   

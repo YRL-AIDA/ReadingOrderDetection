@@ -6,7 +6,4 @@ from utils.drawer import Drawer
 
 sorter = Argument_sorter()
 for page in ExampleDataset().pages:
-    pred_read = sorter.sort(page=page)
-
-    Drawer.draw_with_arrows(page, pred_read=pred_read)
-
+    Drawer.draw_with_arrows(page, pred_read=sorter.sort(page))

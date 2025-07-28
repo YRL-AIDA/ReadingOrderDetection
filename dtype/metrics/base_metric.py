@@ -13,7 +13,7 @@ class BaseMetric(ABC):
             data.append((inds, true_inds))
 
         return self.metric(data)
-    
+
     @abstractmethod
-    def metric(self, right_read: List[int], pred_read: List[int]) -> float:
+    def metric(self, right_order: List[int], pred_order: List[int]) -> float:
         pass
