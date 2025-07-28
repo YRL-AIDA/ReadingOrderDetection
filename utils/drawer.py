@@ -84,6 +84,7 @@ class Drawer():
                             arrowprops=dict(arrowstyle='->', color='blue', lw=1.5)  )
 
         if pred_read:
+            print(pred_read)
             _temp_pred_order = sorted(pred_read)
             for i, j in zip(_temp_pred_order, _temp_pred_order[1:]):
                 bbox_first = page.get_bbox_by_RO(i)

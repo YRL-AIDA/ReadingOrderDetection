@@ -26,12 +26,14 @@ class ExampleDataset(BaseDataset):
                        x_bottom_right = b['x_bottom_right'],
                        y_top_left =     b['y_top_left'],
                        y_bottom_right = b['y_bottom_right']) for i, b in enumerate(blocks)]
-        true_reading_order = list()
+        _true_reading_order = list()
         text = list()
         for i, b in enumerate(blocks):
-            true_reading_order.append(int(b['text']))
+            _true_reading_order.append(int(b['text']))
             text.append(b['text'])
-        print(true_reading_order, text)
+        true_reading_order = [0]*len(_true_reading_order)
+        for index, value in enumerate(_true_reading_order):
+            true_reading_order[value] = index
         page = Page(bboxes, true_reading_order=true_reading_order, img=None, text=text)
         return page
 
