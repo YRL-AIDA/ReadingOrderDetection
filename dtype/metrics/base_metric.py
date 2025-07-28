@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from ..datasets import BaseDataset
 from ..sorters import BaseSorter
-from typing import List, Tuple
+
 
 class BaseMetric(ABC):
     def compute(self, dataset: BaseDataset, sorter: BaseSorter):
