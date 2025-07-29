@@ -1,9 +1,7 @@
-
 from ..base_sorter import BaseSorter, Page, BBox
 from .Edge import Edge
-from treelib import Node, Tree
 from .Walley import Walley
-import time
+
 
 class XYCut(BaseSorter):
 

@@ -12,6 +12,7 @@ class ARD(BaseMetric):
         for temp_data in data:
             pred_order = temp_data[0]
             right_order = temp_data[1]
+            print(pred_order, right_order)
 
             n = len(right_order)
             score = 0

@@ -1,5 +1,5 @@
 from .bbox import BBox
-from typing import List, Dict
+from typing import List
 
 class Page:
     def __init__(self, bboxes: List[BBox], true_reading_order: list[int], img=None, text:List=None):
@@ -16,4 +16,4 @@ class Page:
         return (min_x, min_y), (max_x, max_y)
 
     def get_bbox_by_RO(self, RO):
-        return self.bboxes[self.true_reading_order.index(RO)]
+        return self.bboxes[RO]

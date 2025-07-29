@@ -1,11 +1,10 @@
-import matplotlib
-matplotlib.use('Qt5Agg')
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from dtype.bbox import BBox
 from dtype.sorters.triangular_sorter.sortable_bbox import Left2RightTop2BottomImageSegment
 from typing import Tuple, Dict
 import numpy as np
 from dtype.page import Page
+
 class Drawer():
     '''
     Для отрисовки со стрелками нужно передать страницу, а также по желанию предсказанный порядок
@@ -65,10 +64,12 @@ class Drawer():
                 plt.text(x_coord, y_coord, label, ha='left', va='top', fontsize = sizes[i])
                 i+=1
         # Отрисовка заданного по датасету порядка чтения
-        _temp_order = sorted(page.true_reading_order)
+        _temp_order = page.true_reading_order
+        print(page.true_reading_order)
         for i, j in zip(_temp_order, _temp_order[1:]):
             bbox_first = page.get_bbox_by_RO(i)
             bbox_second = page.get_bbox_by_RO(j)
+            print(bbox_first, bbox_second)
             x1, w1, y1, h1 = bbox_first.x_top_left, \
                             bbox_first.width/2, \
                             bbox_first.y_top_left, \
