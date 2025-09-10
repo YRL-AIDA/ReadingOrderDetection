@@ -61,15 +61,15 @@ class Drawer():
         i = 0
         if labeling:
             for x_coord, y_coord, label in labeling:
-                plt.text(x_coord, y_coord, label, ha='left', va='top', fontsize = sizes[i])
+                plt.text(x_coord, y_coord, label, ha='left', va='top', fontsize = [10 for i in sizes][i])
                 i+=1
         # Отрисовка заданного по датасету порядка чтения
         _temp_order = page.true_reading_order
-        print(page.true_reading_order)
+        
         for i, j in zip(_temp_order, _temp_order[1:]):
             bbox_first = page.get_bbox_by_RO(i)
             bbox_second = page.get_bbox_by_RO(j)
-            print(bbox_first, bbox_second)
+            
             x1, w1, y1, h1 = bbox_first.x_top_left, \
                             bbox_first.width/2, \
                             bbox_first.y_top_left, \
@@ -85,8 +85,7 @@ class Drawer():
                             arrowprops=dict(arrowstyle='->', color='blue', lw=1.5)  )
 
         if pred_read:
-            print(pred_read)
-            _temp_pred_order = sorted(pred_read)
+            _temp_pred_order = pred_read
             for i, j in zip(_temp_pred_order, _temp_pred_order[1:]):
                 bbox_first = page.get_bbox_by_RO(i)
                 bbox_second = page.get_bbox_by_RO(j)

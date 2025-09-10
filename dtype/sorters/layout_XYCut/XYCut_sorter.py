@@ -34,10 +34,10 @@ class XYCut(BaseSorter):
         proec_x = XYCut._proection_x(bboxes, min_coor, max_coor)
         proec_y = XYCut._proection_y(bboxes, min_coor, max_coor)
 
-        if proec_x:
-            XYCut._get_childs_x(bboxes, proec_x, min_coor, max_coor, edge=edge)
-        elif proec_y:
+        if proec_y:
             XYCut._get_childs_y(bboxes, proec_y, min_coor, max_coor, edge=edge)
+        elif proec_x:
+            XYCut._get_childs_x(bboxes, proec_x, min_coor, max_coor, edge=edge)
         else:
             grups = [Edge(number=bbox.id) for bbox in bboxes]
             print(grups, "Если не произошло разделения")
@@ -115,7 +115,7 @@ class XYCut(BaseSorter):
     def _proection_y(bboxes:list[BBox], min_ccor, max_coor):
         proections = []
         flag = 1
-        for y in range(min_ccor[1], max_coor[1]): #шаг тут конечно под вопросом какой ставить
+        for y in range(min_ccor[1], max_coor[1], 1): #шаг тут конечно под вопросом какой ставить
             count = 0
             for bbox in bboxes:
                 if bbox.y_top_left <= y < bbox.y_bottom_right:
