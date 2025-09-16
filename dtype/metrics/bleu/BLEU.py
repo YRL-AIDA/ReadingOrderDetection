@@ -19,7 +19,7 @@ class BLEU(BaseMetric):
             for a, b in zip(self.right_read, self.pred_read):
                 if a==b:
                     score +=1
-            result += score
+            result += score/len(self.right_read)
         return result / len(data)
 
 

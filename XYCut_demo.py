@@ -7,7 +7,7 @@ from utils.drawer import Drawer
 
 pages = PuplayNet().pages
 sorter = XYCut()
-for page in PuplayNet().pages[24:40]:
+for page in PuplayNet().pages[:100]:
 
     Drawer.draw_with_arrows(page, pred_read=sorter.sort(page))
 print(ARD().compute(PuplayNet(), sorter))

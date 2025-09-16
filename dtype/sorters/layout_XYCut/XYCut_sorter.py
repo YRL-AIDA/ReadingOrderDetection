@@ -34,13 +34,13 @@ class XYCut(BaseSorter):
         proec_x = XYCut._proection_x(bboxes, min_coor, max_coor)
         proec_y = XYCut._proection_y(bboxes, min_coor, max_coor)
 
-        if proec_y:
-            XYCut._get_childs_y(bboxes, proec_y, min_coor, max_coor, edge=edge)
-        elif proec_x:
+        if proec_x:
             XYCut._get_childs_x(bboxes, proec_x, min_coor, max_coor, edge=edge)
+        elif proec_y:
+            XYCut._get_childs_y(bboxes, proec_y, min_coor, max_coor, edge=edge)
         else:
             grups = [Edge(number=bbox.id) for bbox in bboxes]
-            print(grups, "Если не произошло разделения")
+            # print(grups, "Если не произошло разделения")
             return grups
 
     @staticmethod
@@ -102,10 +102,13 @@ class XYCut(BaseSorter):
                 if len(proections)!=0:
                     if x != (proections[-1] + 1) and flag == 1:
                         proections.append(x)
+                        break
                         flag = 0
                 else:
                     flag = 0
+                    
                     proections.append(x)
+                    break
             else:
                 flag = 1
         return proections if len(proections) != 0 else False
@@ -126,8 +129,10 @@ class XYCut(BaseSorter):
                     if y != (proections[-1] + 1) and flag == 1:
                         flag = 0
                         proections.append(y)
+                        break
                 else:
                     proections.append(y)
+                    break
                     flag = 0
             else:
                 flag = 1
