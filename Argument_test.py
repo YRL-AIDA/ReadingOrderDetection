@@ -5,7 +5,6 @@ from dtype.metrics import *
 from utils.drawer import Drawer
 
 sorter = Argument_sorter()
-for page in PuplayNet().pages[4:13]:
+for page in PuplayNet().pages[5:6]:
 
     Drawer.draw_with_arrows(page, pred_read=sorter.sort(page))
-print(ARD().compute(ExampleDataset(), sorter))

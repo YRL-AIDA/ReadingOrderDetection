@@ -1,11 +1,13 @@
 from ..base_sorter import BaseSorter, Page, BBox
 from .argumentation_framework import Argument, ArgumentationFramework
+import time
 
 
 class Argument_sorter(BaseSorter):
 
 
     def sort(self, page:'Page'):
+        self.programm_start_time = time.time()
         return self.sort_using_ArugemtationFramework(page)
 
 
@@ -15,8 +17,12 @@ class Argument_sorter(BaseSorter):
         for bbox in page.bboxes:
             arguments += self.get_bbox_arguments(bbox)
         argumentation_framework = ArgumentationFramework(arguments=arguments)
+        get_complete_ext_time = time.time()
         argumentation_framework.get_complete_extensions()
+        print("Получение комплит расширений %s seconds ---" % (time.time() - get_complete_ext_time))
+        get_prefered_ext_time = time.time()
         argumentation_framework.get_preffered_extentions()
+        print("Получение prefered расширений %s seconds ---" % (time.time() - get_prefered_ext_time))
 
         pred_reads = argumentation_framework.preffered_extentions[0]
         args = []
@@ -27,6 +33,8 @@ class Argument_sorter(BaseSorter):
 
         line = self.get_lines(args=args)
         reading_order = self.get_reading_order(line)
+        print("Выполнение всего алгоритма %s seconds ---" % (time.time() - self.programm_start_time))
+
         return reading_order
 
 
