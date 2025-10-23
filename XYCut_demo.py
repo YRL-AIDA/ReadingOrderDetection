@@ -1,13 +1,13 @@
 
-from dtype.datasets import PuplayNet
-from dtype.sorters.rule_sorter.rule_sorter import RuleSorter
+from dtype.datasets import ExampleDataset
 from dtype.sorters import *
 from dtype.metrics import *
 from utils.drawer import Drawer
 
-pages = PuplayNet().pages
+pages = ExampleDataset().pages[0]
 sorter = XYCut()
-for page in PuplayNet().pages[:100]:
 
-    Drawer.draw_with_arrows(page, pred_read=sorter.sort(page))
-print(ARD().compute(PuplayNet(), sorter))
+sorter.sort(pages)
+
+Drawer.draw_with_arrows(pages, pred_read=sorter.sort(pages))
+

@@ -16,11 +16,14 @@ class XYCut(BaseSorter):
         res = []
         def print_childs(childsd):
             for child in childsd:
+                print(child)
                 if child.number == -1:
                     print_childs(child.childs)
+                    
                 else:
                     res.append(child.number)
         print_childs(init_edge.childs)
+        print(res)
         return res
 
 
@@ -40,8 +43,9 @@ class XYCut(BaseSorter):
             XYCut._get_childs_y(bboxes, proec_y, min_coor, max_coor, edge=edge)
         else:
             grups = [Edge(number=bbox.id) for bbox in bboxes]
+            for item in grups:
+                edge.childs.append(item)
             # print(grups, "Если не произошло разделения")
-            return grups
 
     @staticmethod
     def _get_childs_x(bboxes:list[BBox], proec_x, min_coor, max_coor, edge:Edge):
