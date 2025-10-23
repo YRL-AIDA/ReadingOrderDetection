@@ -16,14 +16,12 @@ class XYCut(BaseSorter):
         res = []
         def print_childs(childsd):
             for child in childsd:
-                print(child)
                 if child.number == -1:
                     print_childs(child.childs)
                     
                 else:
                     res.append(child.number)
         print_childs(init_edge.childs)
-        print(res)
         return res
 
 
